@@ -21,13 +21,13 @@ public:
 	Ball(Vector2 vec, int sclr);
 	Ball(Vector2 pos, Vector2 vec, int sclr);
 
-	void Update(Paddle player, int width, int height);
+	void Update(Field *field, Paddle *player, Paddle *CPU, int width, int height, bool *pause);
 	void Render();
 
 
 	//Setters
 	void setScalar(int x);
-	void setVector(Vector2& x);
+	void setVector(Vector2 x);
 	void setPosition(Vector2 pos);
 
 	//Getters

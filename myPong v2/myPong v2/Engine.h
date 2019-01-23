@@ -5,6 +5,9 @@
 #include "GLFW/glfw3.h"
 #pragma comment(lib, "opengl32.lib")
 #include <iostream>
+#include "Field.h"
+#include "Ball.h"
+#include "Paddle.h"
 
 using namespace std;
 
@@ -22,6 +25,7 @@ public:
 	void Update();
 	void beginRender();
 	void endRender();
+	
 
 	static float getDt();
 

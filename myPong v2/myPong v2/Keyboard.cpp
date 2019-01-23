@@ -1,5 +1,6 @@
 #include "Keyboard.h"
 
+
 bool Keyboard::keys[GLFW_KEY_LAST] = { 0 };
 bool Keyboard::keysDown[GLFW_KEY_LAST] = { 0 };
 bool Keyboard::keysUp[GLFW_KEY_LAST] = { 0 };

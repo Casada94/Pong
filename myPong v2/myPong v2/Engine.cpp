@@ -2,8 +2,9 @@
 #include "Mouse.h"
 #include "Keyboard.h"
 
-int Engine::SCREEN_HEIGHT = 1024;
-int Engine::SCREEN_WIDTH = 1024;
+
+int Engine::SCREEN_HEIGHT = 1200;
+int Engine::SCREEN_WIDTH = 1150;
 GLFWwindow* Engine::window = NULL;
 float Engine::dt = 0;
 

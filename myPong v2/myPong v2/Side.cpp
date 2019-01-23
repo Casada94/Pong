@@ -41,13 +41,13 @@ Side::Side(bool p, int w, Vector2 a, Vector2 b)
 }
 
 
-//sets whether or not a side is "solid" or will score a point
+//SETTERS
 void Side::setPoint(bool p)
 {
 	point = p;
 }
 
-//sets width of side lines
+
 void Side::setWidth(int w)
 {
 	width = w;
@@ -59,37 +59,33 @@ void Side::setVertices(Vector2 a, Vector2 b)
 	vertB = b;
 }
 
-//returns point
+//GETTERS
 bool Side::getPoint()
 {
 	return point;
 }
 
-//returns width value
 int Side::getWidth()
 {
 	return width;
 }
 
-//
 Vector2& Side::getVertices()
 {
 	Vector2 temp[2] = { vertA, vertB };
 	return *temp;
 }
 
-//
 Vector2 Side::getVertA()
 {
 	return vertA;
 }
 
-//
+//draws lines
 void Side::Render()
 {
 	glColor3f(1, 1, 1);
 	glLineWidth(30);
-
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	glBegin(GL_LINES);
@@ -97,9 +93,7 @@ void Side::Render()
 	glVertex2i(vertB.getX(), vertB.getY());
 	
 	glEnd();
-
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
 	glFlush();
 }
 

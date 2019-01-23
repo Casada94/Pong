@@ -15,6 +15,7 @@ public:
 	//Constructors
 	Paddle();
 	Paddle(int spd);
+	Paddle(Vector2 pos);
 	Paddle(int spd, int lng);
 	Paddle(Vector2 pos, int spd, int sclr);
 
