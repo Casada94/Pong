@@ -87,9 +87,10 @@ void Ball::Update(Field *field, Paddle *player, Paddle *CPU, int width, int heig
 	{
 		if (field->isPointSide(0))
 		{
-			field->addPoint(1);
-			setPosition(Vector2(500, 500));
-			player->setPostion(Vector2(450, 50));
+			field->addPoint(0);
+			setPosition(Vector2(field->getRightLimit() / 2, Engine::SCREEN_HEIGHT/2));
+			player->setPostion(Vector2(field->getRightLimit() / 2, 50));
+			CPU->setPostion(Vector2(field->getRightLimit() / 2, field->getTopLimit() - 40));
 			*pause = true;
 
 			PlaySound(TEXT("you_suck.wav"), NULL, SND_FILENAME | SND_ASYNC);
@@ -111,10 +112,10 @@ void Ball::Update(Field *field, Paddle *player, Paddle *CPU, int width, int heig
 	{
 		if (field->isPointSide(2))
 		{
-			field->addPoint(0);
-			setPosition(Vector2(500, 500));
-			player->setPostion(Vector2(450, 50));
-
+			field->addPoint(1);
+			setPosition(Vector2(field->getRightLimit() / 2, Engine::SCREEN_HEIGHT / 2));
+			player->setPostion(Vector2(field->getRightLimit() / 2, 50));
+			CPU->setPostion(Vector2(field->getRightLimit() / 2, field->getTopLimit() - 40));
 			*pause = true;
 
 			srand((unsigned)time(0));

@@ -85,11 +85,11 @@ void Field::Render()
 }
 
 //vertices for CPU score numbers
-void Field::CPUscore()
+void Field::playerScore()
 {
 	int x = getRightLimit();
 
-	switch (score[0])
+	switch (score[1])
 	{
 	case 0:
 		glVertex2i(x + 40, 170);		//top left vert
@@ -207,12 +207,12 @@ void Field::CPUscore()
 }
 
 //vertices for players score numbers
-void Field::playerScore()
+void Field::CPUscore()
 {
 	int x = getRightLimit();
 	int y = getTopLimit();
 
-	switch (score[1])
+	switch (score[0])
 	{
 	case 0:
 		glVertex2i(x + 40, y - 70);		//top left vert

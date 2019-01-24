@@ -96,14 +96,14 @@ int main()
 		}
 
 		//end of game; start of new round
-		if (field.getScore(1) >= 10)
+		if (field.getScore(0) >= 10)
 		{
 			pause = true;
 			cout << "CPU Wins!" << endl;
 			PlaySound(TEXT("good.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			field.resetScore();
 		}
-		else if (field.getScore(0) >= 10)
+		else if (field.getScore(1) >= 10)
 		{
 			pause = true;
 			cout << "Player Wins!" << endl;
