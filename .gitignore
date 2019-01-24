@@ -3,3 +3,10 @@
 ################################################################################
 
 /myPong v2/.vs/myPong v2/v15/Browse.VC.opendb
+myPong v2/.vs/myPong v2/v15/.suo
+*.obj
+*.obj
+myPong v2/.vs/myPong v2/v15/.suo
+*.ipch
+*.log
+*.pdb
