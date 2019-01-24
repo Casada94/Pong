@@ -18,9 +18,9 @@ Field::Field()
 	score[0] = 0;
 	score[1] = 0;
 	sides[0] = Side(1, 10, vertA, vertB);
-	sides[1] = Side(0,10,vertB, vertC);
-	sides[2] = Side(1,10, vertC, vertD);
-	sides[3] = Side(0,10,vertD, vertA);
+	sides[1] = Side(0, 10, vertB, vertC);
+	sides[2] = Side(1, 10, vertC, vertD);
+	sides[3] = Side(0, 10, vertD, vertA);
 }
 
 //4 argument constructor for setting what sides will count for points
@@ -57,9 +57,12 @@ Field::Field(int t, int r, int b, int l, Vector2 tl, Vector2 tr, Vector2 br, Vec
 }
 
 //
-void Field::Update()
+void Field::Update(int width, int height)
 {
-
+	sides[0].setVertices(Vector2(15, 15), Vector2(width - 150, 15));
+	sides[1].setVertices(Vector2(width - 150, 15), Vector2(width - 150, height - 15));
+	sides[2].setVertices(Vector2(width - 150, height - 15), Vector2(15, height - 15));
+	sides[3].setVertices(Vector2(15, height - 15), Vector2(15, 15));
 }
 
 //Calls side's render function to draw all four sides of a the field
@@ -84,237 +87,242 @@ void Field::Render()
 //vertices for CPU score numbers
 void Field::CPUscore()
 {
+	int x = getRightLimit();
+
 	switch (score[0])
 	{
 	case 0:
-		glVertex2i(1050, 120);		//top left vert
-		glVertex2i(1050, 20);		//bottom left vert
-		glVertex2i(1100, 120);		//top right vert
-		glVertex2i(1100, 20);		//bottom right vert
-		glVertex2i(1050, 120);
-		glVertex2i(1100, 120);
-		glVertex2i(1050, 20);
-		glVertex2i(1100, 20);
+		glVertex2i(x + 40, 170);		//top left vert
+		glVertex2i(x + 40, 70);		//bottom left vert
+		glVertex2i(x + 90, 170);		//top right vert
+		glVertex2i(x + 90, 70);		//bottom right vert
+		glVertex2i(x + 40, 170);
+		glVertex2i(x + 90, 170);
+		glVertex2i(x + 40, 70);
+		glVertex2i(x + 90, 70);
 		break;
-	case 1: 
-		glVertex2i(1075, 120);
-		glVertex2i(1075, 20);
+	case 1:
+		glVertex2i(x + 65, 170);
+		glVertex2i(x + 65, 70);
 		break;
 	case 2:
-		glVertex2i(1050, 120);
-		glVertex2i(1100, 120);
-		glVertex2i(1100, 120);
-		glVertex2i(1100, 70);			//right middle vert
-		glVertex2i(1100, 70);
-		glVertex2i(1050, 70);			//left middle vert
-		glVertex2i(1050, 70);
-		glVertex2i(1050, 20);
-		glVertex2i(1050, 20);
-		glVertex2i(1100, 20);
+		glVertex2i(x + 40, 170);
+		glVertex2i(x + 90, 170);
+		glVertex2i(x + 90, 170);
+		glVertex2i(x + 90, 120);			//right middle vert
+		glVertex2i(x + 90, 120);
+		glVertex2i(x + 40, 120);			//left middle vert
+		glVertex2i(x + 40, 120);
+		glVertex2i(x + 40, 70);
+		glVertex2i(x + 40, 70);
+		glVertex2i(x + 90, 70);
 		break;
 	case 3:
-		glVertex2i(1050, 120);
-		glVertex2i(1100, 120);
-		glVertex2i(1100, 120);
-		glVertex2i(1100, 70);
-		glVertex2i(1100, 70);
-		glVertex2i(1075, 70);		//center middle
-		glVertex2i(1100, 70);
-		glVertex2i(1100, 20);		//bottom right vert
-		glVertex2i(1100, 20);		//bottom right vert
-		glVertex2i(1050, 20);		//bottom left vert
+		glVertex2i(x + 40, 170);
+		glVertex2i(x + 90, 170);
+		glVertex2i(x + 90, 170);
+		glVertex2i(x + 90, 120);
+		glVertex2i(x + 90, 120);
+		glVertex2i(x + 65, 120);		//center middle
+		glVertex2i(x + 90, 120);
+		glVertex2i(x + 90, 70);		//bottom right vert
+		glVertex2i(x + 90, 70);		//bottom right vert
+		glVertex2i(x + 40, 70);		//bottom left vert
 		break;
 	case 4:
-		glVertex2i(1050, 120);		//top left vert
-		glVertex2i(1050, 70);			//left middle vert
-		glVertex2i(1050, 70);			//left middle vert
-		glVertex2i(1100, 70);			//right middle vert
-		glVertex2i(1100, 120);		//top right vert
-		glVertex2i(1100, 20);		//bottom right vert
+		glVertex2i(x + 40, 170);		//top left vert
+		glVertex2i(x + 40, 120);			//left middle vert
+		glVertex2i(x + 40, 120);			//left middle vert
+		glVertex2i(x + 90, 120);			//right middle vert
+		glVertex2i(x + 90, 170);		//top right vert
+		glVertex2i(x + 90, 70);		//bottom right vert
 		break;
 	case 5:
-		glVertex2i(1050, 120);		//top left vert
-		glVertex2i(1100, 120);		//top right vert
-		glVertex2i(1050, 120);			//top left vert
-		glVertex2i(1050, 70);			//left middle vert
-		glVertex2i(1050, 70);		//left middle vert
-		glVertex2i(1100, 70);		//right middle vert
-		glVertex2i(1100, 70);			//right middle vert
-		glVertex2i(1100, 20);			//bottom right vert
-		glVertex2i(1100, 20);		//bottom right vert
-		glVertex2i(1050, 20);		//bottom left vert
+		glVertex2i(x + 40, 170);		//top left vert
+		glVertex2i(x + 90, 170);		//top right vert
+		glVertex2i(x + 40, 170);			//top left vert
+		glVertex2i(x + 40, 120);			//left middle vert
+		glVertex2i(x + 40, 120);		//left middle vert
+		glVertex2i(x + 90, 120);		//right middle vert
+		glVertex2i(x + 90, 120);			//right middle vert
+		glVertex2i(x + 90, 70);			//bottom right vert
+		glVertex2i(x + 90, 70);		//bottom right vert
+		glVertex2i(x + 40, 70);		//bottom left vert
 		break;
 	case 6:
-		glVertex2i(1050, 120);		//top left vert
-		glVertex2i(1100, 120);		//top right vert
-		glVertex2i(1050, 120);			//top left vert
-		glVertex2i(1050, 20);			//bottom left vert
-		glVertex2i(1050, 20);		//bottom left vert
-		glVertex2i(1100, 20);		//bottom right vert
-		glVertex2i(1100, 20);			//bottom right vert
-		glVertex2i(1100, 70);			//right middle vert
-		glVertex2i(1100, 70);		//right middle vert
-		glVertex2i(1050, 70);		//left middle vert
+		glVertex2i(x + 40, 170);		//top left vert
+		glVertex2i(x + 90, 170);		//top right vert
+		glVertex2i(x + 40, 170);			//top left vert
+		glVertex2i(x + 40, 70);			//bottom left vert
+		glVertex2i(x + 40, 70);		//bottom left vert
+		glVertex2i(x + 90, 70);		//bottom right vert
+		glVertex2i(x + 90, 70);			//bottom right vert
+		glVertex2i(x + 90, 120);			//right middle vert
+		glVertex2i(x + 90, 120);		//right middle vert
+		glVertex2i(x + 40, 120);		//left middle vert
 		break;
 	case 7:
-		glVertex2i(1050, 120);		//top left vert
-		glVertex2i(1100, 120);		//top right vert
-		glVertex2i(1100, 120);			//top right vert
-		glVertex2i(1100, 20);			//bottom right vert
+		glVertex2i(x + 40, 170);		//top left vert
+		glVertex2i(x + 90, 170);		//top right vert
+		glVertex2i(x + 90, 170);			//top right vert
+		glVertex2i(x + 90, 70);			//bottom right vert
 		break;
 	case 8:
-		glVertex2i(1050, 120);		//top left vert
-		glVertex2i(1050, 20);		//bottom left vert
-		glVertex2i(1100, 120);			//top right vert
-		glVertex2i(1100, 20);			//bottom right vert
-		glVertex2i(1050, 120);
-		glVertex2i(1100, 120);
-		glVertex2i(1050, 20);
-		glVertex2i(1100, 20);
-		glVertex2i(1100, 70);		//right middle vert
-		glVertex2i(1050, 70);		//left middle vert
+		glVertex2i(x + 40, 170);		//top left vert
+		glVertex2i(x + 40, 70);		//bottom left vert
+		glVertex2i(x + 90, 170);			//top right vert
+		glVertex2i(x + 90, 70);			//bottom right vert
+		glVertex2i(x + 40, 170);
+		glVertex2i(x + 90, 170);
+		glVertex2i(x + 40, 70);
+		glVertex2i(x + 90, 70);
+		glVertex2i(x + 90, 120);		//right middle vert
+		glVertex2i(x + 40, 120);		//left middle vert
 		break;
 	case 9:
-		glVertex2i(1050, 120);		//top left vert
-		glVertex2i(1100, 120);		//top right vert
-		glVertex2i(1050, 120);		//top left vert
-		glVertex2i(1050, 70);		//left middle vert
-		glVertex2i(1050, 70);		//left middle vert
-		glVertex2i(1100, 70);		//right middle vert
-		glVertex2i(1100, 120);		//top right vert
-		glVertex2i(1100, 20);			//bottom right vert
+		glVertex2i(x + 40, 170);		//top left vert
+		glVertex2i(x + 90, 170);		//top right vert
+		glVertex2i(x + 40, 170);		//top left vert
+		glVertex2i(x + 40, 120);		//left middle vert
+		glVertex2i(x + 40, 120);		//left middle vert
+		glVertex2i(x + 90, 120);		//right middle vert
+		glVertex2i(x + 90, 170);		//top right vert
+		glVertex2i(x + 90, 70);			//bottom right vert
 		break;
 	case 10:
-		glVertex2i(1075, 120);		//top left vert
-		glVertex2i(1075, 20);		//bottom left vert
-		glVertex2i(1110, 120);		//top right vert
-		glVertex2i(1110, 20);		//bottom right vert
-		glVertex2i(1075, 120);
-		glVertex2i(1110, 120);
-		glVertex2i(1075, 20);
-		glVertex2i(1110, 20);
-		glVertex2i(1045, 120);
-		glVertex2i(1045, 20);
+		glVertex2i(x + 65, 170);		//top left vert
+		glVertex2i(x + 65, 70);		//bottom left vert
+		glVertex2i(1110, 170);		//top right vert
+		glVertex2i(1110, 70);		//bottom right vert
+		glVertex2i(x + 65, 170);
+		glVertex2i(1110, 170);
+		glVertex2i(x + 65, 70);
+		glVertex2i(1110, 70);
+		glVertex2i(1045, 170);
+		glVertex2i(1045, 70);
 		break;
-	default:{}
-		
+	default: {}
+
 	}
 }
 
 //vertices for players score numbers
 void Field::playerScore()
 {
+	int x = getRightLimit();
+	int y = getTopLimit();
+
 	switch (score[1])
 	{
 	case 0:
-		glVertex2i(1050, 1010);		//top left vert
-		glVertex2i(1050, 910);		//bottom left vert
-		glVertex2i(1100, 1010);		//top right vert
-		glVertex2i(1100, 910);		//bottom right vert
-		glVertex2i(1050, 1010);
-		glVertex2i(1100, 1010);
-		glVertex2i(1050, 910);
-		glVertex2i(1100, 910);
+		glVertex2i(x + 40, y - 70);		//top left vert
+		glVertex2i(x + 40, y - 170);		//bottom left vert
+		glVertex2i(x + 90, y - 70);		//top right vert
+		glVertex2i(x + 90, y - 170);		//bottom right vert
+		glVertex2i(x + 40, y - 70);
+		glVertex2i(x + 90, y - 70);
+		glVertex2i(x + 40, y - 170);
+		glVertex2i(x + 90, y - 170);
 		break;
 	case 1:
-		glVertex2i(1075, 1010);
-		glVertex2i(1075, 910);
+		glVertex2i(x + 65, y - 70);
+		glVertex2i(x + 65, y - 170);
 		break;
 	case 2:
-		glVertex2i(1050, 1010);
-		glVertex2i(1100, 1010);
-		glVertex2i(1100, 1010);
-		glVertex2i(1100, 960);			//right middle vert
-		glVertex2i(1100, 960);
-		glVertex2i(1050, 960);			//left middle vert
-		glVertex2i(1050, 960);
-		glVertex2i(1050, 910);
-		glVertex2i(1050, 910);
-		glVertex2i(1100, 910);
+		glVertex2i(x + 40, y - 70);
+		glVertex2i(x + 90, y - 70);
+		glVertex2i(x + 90, y - 70);
+		glVertex2i(x + 90, y - 120);			//right middle vert
+		glVertex2i(x + 90, y - 120);
+		glVertex2i(x + 40, y - 120);			//left middle vert
+		glVertex2i(x + 40, y - 120);
+		glVertex2i(x + 40, y - 170);
+		glVertex2i(x + 40, y - 170);
+		glVertex2i(x + 90, y - 170);
 		break;
 	case 3:
-		glVertex2i(1050, 1010);
-		glVertex2i(1100, 1010);
-		glVertex2i(1100, 1010);
-		glVertex2i(1100, 960);
-		glVertex2i(1100, 960);
-		glVertex2i(1075, 960);		//center middle
-		glVertex2i(1100, 960);
-		glVertex2i(1100, 910);		//bottom right vert
-		glVertex2i(1100, 910);		//bottom right vert
-		glVertex2i(1050, 910);		//bottom left vert
+		glVertex2i(x + 40, y - 70);
+		glVertex2i(x + 90, y - 70);
+		glVertex2i(x + 90, y - 70);
+		glVertex2i(x + 90, y - 120);
+		glVertex2i(x + 90, y - 120);
+		glVertex2i(x + 65, y - 120);		//center middle
+		glVertex2i(x + 90, y - 120);
+		glVertex2i(x + 90, y - 170);		//bottom right vert
+		glVertex2i(x + 90, y - 170);		//bottom right vert
+		glVertex2i(x + 40, y - 170);		//bottom left vert
 		break;
 	case 4:
-		glVertex2i(1050, 1010);		//top left vert
-		glVertex2i(1050, 960);			//left middle vert
-		glVertex2i(1050, 960);			//left middle vert
-		glVertex2i(1100, 960);			//right middle vert
-		glVertex2i(1100, 1010);		//top right vert
-		glVertex2i(1100, 910);		//bottom right vert
+		glVertex2i(x + 40, y - 70);		//top left vert
+		glVertex2i(x + 40, y - 120);			//left middle vert
+		glVertex2i(x + 40, y - 120);			//left middle vert
+		glVertex2i(x + 90, y - 120);			//right middle vert
+		glVertex2i(x + 90, y - 70);		//top right vert
+		glVertex2i(x + 90, y - 170);		//bottom right vert
 		break;
 	case 5:
-		glVertex2i(1050, 1010);		//top left vert
-		glVertex2i(1100, 1010);		//top right vert
-		glVertex2i(1050, 1010);			//top left vert
-		glVertex2i(1050, 960);			//left middle vert
-		glVertex2i(1050, 960);		//left middle vert
-		glVertex2i(1100, 960);		//right middle vert
-		glVertex2i(1100, 960);			//right middle vert
-		glVertex2i(1100, 910);			//bottom right vert
-		glVertex2i(1100, 910);		//bottom right vert
-		glVertex2i(1050, 910);		//bottom left vert
+		glVertex2i(x + 40, y - 70);		//top left vert
+		glVertex2i(x + 90, y - 70);		//top right vert
+		glVertex2i(x + 40, y - 70);			//top left vert
+		glVertex2i(x + 40, y - 120);			//left middle vert
+		glVertex2i(x + 40, y - 120);		//left middle vert
+		glVertex2i(x + 90, y - 120);		//right middle vert
+		glVertex2i(x + 90, y - 120);			//right middle vert
+		glVertex2i(x + 90, y - 170);			//bottom right vert
+		glVertex2i(x + 90, y - 170);		//bottom right vert
+		glVertex2i(x + 40, y - 170);		//bottom left vert
 		break;
 	case 6:
-		glVertex2i(1050, 1010);		//top left vert
-		glVertex2i(1100, 1010);		//top right vert
-		glVertex2i(1050, 1010);			//top left vert
-		glVertex2i(1050, 910);			//bottom left vert
-		glVertex2i(1050, 910);		//bottom left vert
-		glVertex2i(1100, 910);		//bottom right vert
-		glVertex2i(1100, 910);			//bottom right vert
-		glVertex2i(1100, 960);			//right middle vert
-		glVertex2i(1100, 960);		//right middle vert
-		glVertex2i(1050, 960);		//left middle vert
+		glVertex2i(x + 40, y - 70);		//top left vert
+		glVertex2i(x + 90, y - 70);		//top right vert
+		glVertex2i(x + 40, y - 70);			//top left vert
+		glVertex2i(x + 40, y - 170);			//bottom left vert
+		glVertex2i(x + 40, y - 170);		//bottom left vert
+		glVertex2i(x + 90, y - 170);		//bottom right vert
+		glVertex2i(x + 90, y - 170);			//bottom right vert
+		glVertex2i(x + 90, y - 120);			//right middle vert
+		glVertex2i(x + 90, y - 120);		//right middle vert
+		glVertex2i(x + 40, y - 120);		//left middle vert
 		break;
 	case 7:
-		glVertex2i(1050, 1010);		//top left vert
-		glVertex2i(1100, 1010);		//top right vert
-		glVertex2i(1100, 1010);			//top right vert
-		glVertex2i(1100, 910);			//bottom right vert
+		glVertex2i(x + 40, y - 70);		//top left vert
+		glVertex2i(x + 90, y - 70);		//top right vert
+		glVertex2i(x + 90, y - 70);			//top right vert
+		glVertex2i(x + 90, y - 170);			//bottom right vert
 		break;
 	case 8:
-		glVertex2i(1050, 1010);		//top left vert
-		glVertex2i(1050, 910);		//bottom left vert
-		glVertex2i(1100, 1010);			//top right vert
-		glVertex2i(1100, 910);			//bottom right vert
-		glVertex2i(1050, 1010);
-		glVertex2i(1100, 1010);
-		glVertex2i(1050, 910);
-		glVertex2i(1100, 910);
-		glVertex2i(1100, 960);		//right middle vert
-		glVertex2i(1050, 960);		//left middle vert
+		glVertex2i(x + 40, y - 70);		//top left vert
+		glVertex2i(x + 40, y - 170);		//bottom left vert
+		glVertex2i(x + 90, y - 70);			//top right vert
+		glVertex2i(x + 90, y - 170);			//bottom right vert
+		glVertex2i(x + 40, y - 70);
+		glVertex2i(x + 90, y - 70);
+		glVertex2i(x + 40, y - 170);
+		glVertex2i(x + 90, y - 170);
+		glVertex2i(x + 90, y - 120);		//right middle vert
+		glVertex2i(x + 40, y - 120);		//left middle vert
 		break;
 	case 9:
-		glVertex2i(1050, 1010);		//top left vert
-		glVertex2i(1100, 1010);		//top right vert
-		glVertex2i(1050, 1010);		//top left vert
-		glVertex2i(1050, 960);		//left middle vert
-		glVertex2i(1050, 960);		//left middle vert
-		glVertex2i(1100, 960);		//right middle vert
-		glVertex2i(1100, 1010);		//top right vert
-		glVertex2i(1100, 910);			//bottom right vert
+		glVertex2i(x + 40, y - 70);		//top left vert
+		glVertex2i(x + 90, y - 70);		//top right vert
+		glVertex2i(x + 40, y - 70);		//top left vert
+		glVertex2i(x + 40, y - 120);		//left middle vert
+		glVertex2i(x + 40, y - 120);		//left middle vert
+		glVertex2i(x + 90, y - 120);		//right middle vert
+		glVertex2i(x + 90, y - 70);		//top right vert
+		glVertex2i(x + 90, y - 170);			//bottom right vert
 		break;
 	case 10:
-		glVertex2i(1075, 1010);		//top left vert
-		glVertex2i(1075, 910);		//bottom left vert
-		glVertex2i(1110, 1010);		//top right vert
-		glVertex2i(1110, 910);		//bottom right vert
-		glVertex2i(1075, 1010);
-		glVertex2i(1110, 1010);
-		glVertex2i(1075, 910);
-		glVertex2i(1110, 910);
-		glVertex2i(1045, 1010);
-		glVertex2i(1045, 910);
+		glVertex2i(x + 65, y - 70);		//top left vert
+		glVertex2i(x + 65, y - 170);		//bottom left vert
+		glVertex2i(1110, y - 70);		//top right vert
+		glVertex2i(1110, y - 170);		//bottom right vert
+		glVertex2i(x + 65, y - 70);
+		glVertex2i(1110, y - 70);
+		glVertex2i(x + 65, y - 170);
+		glVertex2i(1110, y - 170);
+		glVertex2i(1045, y - 70);
+		glVertex2i(1045, y - 170);
 		break;
 	default: {}
 
@@ -374,6 +382,3 @@ int Field::getScore(int x)
 {
 	return score[x];
 }
-
-
-

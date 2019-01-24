@@ -22,9 +22,9 @@ public:
 	void resetScore();
 
 	//GLFW STUFF
-	void Update();
+	void Update(int width, int height);
 	void Render();
-	
+
 
 	//Setters
 	void setPointSide(int x, bool y);

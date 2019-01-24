@@ -1,7 +1,6 @@
 #ifndef myPONGv2_ENGINE
 #define myPONGv2_ENGINE
 
-
 #include "GLFW/glfw3.h"
 #pragma comment(lib, "opengl32.lib")
 #include <iostream>
@@ -25,7 +24,7 @@ public:
 	void Update();
 	void beginRender();
 	void endRender();
-	
+
 
 	static float getDt();
 
@@ -36,6 +35,5 @@ private:
 	static float dt;
 	float lastDt;
 };
-
 
 #endif

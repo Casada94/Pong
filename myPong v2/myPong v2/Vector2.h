@@ -30,5 +30,4 @@ public:
 	Vector2 operator*(float x1);
 };
 
-
 #endif

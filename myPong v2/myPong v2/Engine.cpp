@@ -65,7 +65,6 @@ bool Engine::Initialize(const char* windowTitle)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-
 	lastDt = (float)glfwGetTime();
 
 	return true;
@@ -73,6 +72,14 @@ bool Engine::Initialize(const char* windowTitle)
 
 void Engine::Update()
 {
+	glfwGetWindowSize(window, &SCREEN_WIDTH, &SCREEN_HEIGHT);
+	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, -10, 10);
+	glDepthRange(-10, 10);
+	glMatrixMode(GL_MODELVIEW);
+
 	float now = (float)glfwGetTime();
 	dt = (now - lastDt);
 	lastDt = now;

@@ -91,9 +91,10 @@ void Side::Render()
 	glBegin(GL_LINES);
 	glVertex2i(vertA.getX(), vertA.getY());
 	glVertex2i(vertB.getX(), vertB.getY());
-	
+
 	glEnd();
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glFlush();
 }
+
 

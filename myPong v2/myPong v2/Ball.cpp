@@ -47,7 +47,7 @@ Ball::Ball(Vector2 pos, Vector2 vec, int sclr)
 /*
 The ball is the most important asset in the game. Thus its responsibilities are greatest
 
-this function uses the other assets to determing what actions the ball should take, 
+this function uses the other assets to determing what actions the ball should take,
 whether to bounce of a side, paddle, or score a point.
 */
 void Ball::Update(Field *field, Paddle *player, Paddle *CPU, int width, int height, bool *pause)
@@ -70,7 +70,7 @@ void Ball::Update(Field *field, Paddle *player, Paddle *CPU, int width, int heig
 		}
 
 		PlaySound(TEXT("hitWall.wav"), NULL, SND_FILENAME | SND_ASYNC);
-		
+
 		vec.invertX();
 	}
 	else if (x >= width - scalar)
@@ -78,12 +78,12 @@ void Ball::Update(Field *field, Paddle *player, Paddle *CPU, int width, int heig
 		setPosition(Vector2(width - scalar, y));
 		if (vec.getX() > 500)
 		{
-			vec = vec - 100;	
+			vec = vec - 100;
 		}
 		PlaySound(TEXT("hitWall.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		vec.invertX();
 	}
-	if (y <= 25 )
+	if (y <= 25)
 	{
 		if (field->isPointSide(0))
 		{
@@ -93,7 +93,7 @@ void Ball::Update(Field *field, Paddle *player, Paddle *CPU, int width, int heig
 			*pause = true;
 
 			PlaySound(TEXT("you_suck.wav"), NULL, SND_FILENAME | SND_ASYNC);
-	
+
 			int upDown[2] = { -1000,1000 };
 			int leftRight[2] = { -1,1 };
 			int i = rand() % 750;
@@ -114,7 +114,7 @@ void Ball::Update(Field *field, Paddle *player, Paddle *CPU, int width, int heig
 			field->addPoint(0);
 			setPosition(Vector2(500, 500));
 			player->setPostion(Vector2(450, 50));
-			
+
 			*pause = true;
 
 			srand((unsigned)time(0));
@@ -123,7 +123,7 @@ void Ball::Update(Field *field, Paddle *player, Paddle *CPU, int width, int heig
 			int i = rand() % 750;
 			int x = rand() % 2;
 			cout << i << endl;
-			setVector(Vector2(i * leftRight[x], upDown[i%2]));
+			setVector(Vector2(i * leftRight[x], upDown[i % 2]));
 		}
 		else
 		{
@@ -132,21 +132,21 @@ void Ball::Update(Field *field, Paddle *player, Paddle *CPU, int width, int heig
 		}
 	}
 	//hit detection	
-	if ((x >= playPos && x <= (playPos + player->getLength())) &&  y < player->getPostion().getY() +10 && y > player->getPostion().getY() - 20)
+	if ((x >= playPos && x <= (playPos + player->getLength())) && y < player->getPostion().getY() + 10 && y > player->getPostion().getY() - 20)
 	{
 		if ((vec.getX() + deflect.getX()) > 1350)
 			vec = Vector2(1350, vec.getY());
-		else if((vec.getX() + deflect.getX()) < -1350)
+		else if ((vec.getX() + deflect.getX()) < -1350)
 			vec = Vector2(-1350, vec.getY());
 		else
-			vec = vec + (deflect*100);
-		
+			vec = vec + (deflect * 100);
+
 		setPosition(Vector2(x, player->getPostion().getY() + 10));
-		
+
 		PlaySound(TEXT("hitPaddle.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		vec.invertY();
 	}
-	if ((x >= cpuPos && x <= (cpuPos + CPU->getLength())) && y > CPU->getPostion().getY()  - 10 && y < CPU->getPostion().getY() + 20)
+	if ((x >= cpuPos && x <= (cpuPos + CPU->getLength())) && y > CPU->getPostion().getY() - 10 && y < CPU->getPostion().getY() + 20)
 	{
 		if ((vec.getX() + deflectCPU.getX()) > 1350)
 			vec = Vector2(1350, vec.getY());
@@ -154,7 +154,7 @@ void Ball::Update(Field *field, Paddle *player, Paddle *CPU, int width, int heig
 			vec = Vector2(-1350, vec.getY());
 		else
 			vec = vec + (deflectCPU * 100);
-		
+
 		PlaySound(TEXT("hitPaddle.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		setPosition(Vector2(x, CPU->getPostion().getY() - 10));
 

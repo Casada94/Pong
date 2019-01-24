@@ -49,7 +49,7 @@ Paddle::Paddle(Vector2 pos, int spd, int lng)
 void Paddle::Update()
 {
 	lastPos = position;
-	
+
 }
 
 //Draws players paddle to the screen
@@ -86,9 +86,9 @@ void Paddle::moveRight(int width)
 	lastPos = position;
 	temp = position + (speed*Engine::getDt());
 
-	if (temp.getX() < (width- length))
+	if (temp.getX() < (width - length))
 		position = temp;
-	
+
 }
 
 //SETTERS
