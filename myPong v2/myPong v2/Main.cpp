@@ -24,6 +24,13 @@ int main()
 	Paddle CPU = Paddle(Vector2(450, field.getTopLimit() - 40), 1065, 150);
 	Ball pong = Ball();
 
+
+	int cpuX;
+	int pongX;
+	int pongY;
+	int pongMoveX;
+	int pongMoveY;
+
 	bool pause = true;
 
 	while (true)
@@ -34,8 +41,8 @@ int main()
 		if (!pause)
 		{
 			pong.Update(&field, &player, &CPU, field.getRightLimit(), field.getTopLimit(), &pause);
-			player.Update();
-			CPU.Update();
+			player.Update(field.getBottomLimit() + 40);
+			CPU.Update(field.getTopLimit() - 40);
 			field.Update(engine.SCREEN_WIDTH, engine.SCREEN_HEIGHT);
 
 			if (Keyboard::key(GLFW_KEY_A))
@@ -47,17 +54,25 @@ int main()
 				player.moveRight(field.getRightLimit());
 			}
 
+			cpuX = CPU.getPostion().getX();
+			//int cpuY = CPU.getPostion().getY();
+			pongX = pong.getPostion().getX();
+			pongY = pong.getPostion().getY();
+			pongMoveX = pong.getMovement().getX();
+			pongMoveY = pong.getMovement().getY();
+
+
 			//CPU logic for game decision making
-			if (pong.getMovement().getY() > 0)		//ball going up
+			if (pongMoveY > 0)		//ball going up
 			{
-				if (((CPU.getPostion().getX() + 75) < pong.getPostion().getX()) && pong.getPostion().getY() > 500)	//cpu to the left of ball
+				if (((cpuX + 75) < pongX) && pongY > 500)	//cpu to the left of ball
 				{
-					if (pong.getMovement().getX() < 0 && pong.getMovement().getY() < 500)		//ball moving left
+					if (pongX < 0 && pongMoveY < 500)		//ball moving left
 					{
 					}
-					else if ((pong.getPostion().getX() > 650 && pong.getPostion().getY() < 350))		//ball will hit wall
+					else if ((pongX > 650 && pongY < 350))		//ball will hit wall
 					{
-						if (pong.getMovement().getX() < 0)
+						if (pongMoveX < 0)
 							CPU.moveRight(field.getRightLimit());
 						else
 							CPU.moveLeft(field.getLeftLimit());
@@ -66,12 +81,12 @@ int main()
 						CPU.moveRight(field.getRightLimit());
 
 				}
-				else if (((CPU.getPostion().getX() + 75) > pong.getPostion().getX()) && pong.getPostion().getY() > 500)	//cpu to the right of ball
+				else if (((cpuX + 75) > pongX) && pongY > 500)	//cpu to the right of ball
 				{
-					if (pong.getMovement().getX() > 0 && pong.getMovement().getY() < 500)		//ball moving right
+					if (pongMoveX > 0 && pongMoveY < 500)		//ball moving right
 					{
 					}
-					else if ((pong.getPostion().getX() < 350 && pong.getPostion().getY() < 350))		//ball will hit wall
+					else if ((pongX < 350 && pongY < 350))		//ball will hit wall
 					{
 						CPU.moveRight(field.getRightLimit());
 					}									//ball moving left
@@ -79,11 +94,11 @@ int main()
 						CPU.moveLeft(field.getLeftLimit());
 				}
 			}
-			else if (pong.getMovement().getY() < 0)
+			else if (pongMoveY < 0)
 			{
-				if ((CPU.getPostion().getX() + 75) < ((field.getRightLimit() / 2) - 50))
+				if ((cpuX + 75) < ((field.getRightLimit() / 2) - 50))
 					CPU.moveRight(field.getRightLimit());
-				else if ((CPU.getPostion().getX() + 75) > field.getRightLimit() / 2)
+				else if ((cpuX + 75) > field.getRightLimit() / 2)
 					CPU.moveLeft(field.getLeftLimit());
 			}
 		}

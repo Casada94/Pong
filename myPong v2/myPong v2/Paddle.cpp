@@ -46,8 +46,9 @@ Paddle::Paddle(Vector2 pos, int spd, int lng)
 }
 
 //Updates last position to tell if a player is moving or not
-void Paddle::Update()
+void Paddle::Update(int x)
 {
+	position.setY(x);
 	lastPos = position;
 
 }

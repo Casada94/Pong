@@ -32,7 +32,7 @@ void Vector2::setX(int a)
 
 void Vector2::setY(int a)
 {
-	x = y;
+	y = a;
 }
 
 //DIRECTIONAL CHANGE

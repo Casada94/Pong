@@ -20,7 +20,7 @@ public:
 	Paddle(Vector2 pos, int spd, int sclr);
 
 	//GLFW STUFF
-	void Update();
+	void Update(int x);
 	void Render();
 
 	//Movement
